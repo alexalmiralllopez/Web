@@ -226,19 +226,29 @@
             line-height: 1.5;
         }
 
-        /* PNG FOCUS */
+        /* PNG FOCUS (AJUSTAT A MÒBIL I TABLET) */
         .leds-decor {
             position: absolute;
-            z-index: 5;
+            z-index: 10; /* Perquè quedi superposat al vídeo */
             pointer-events: none;
             transform: scaleX(-1);
-            width: 180px;
-            top: 20px;
-            right: -50px;
+            width: 120px; /* Reduït per a mòbil */
+            top: 50px;    /* Col·locat lleugerament sobre el vídeo de Corcovado */
+            right: -10px;
+            opacity: 0.95;
         }
 
 
         /* 4. DISSENY RESPONSIVE PER A ESCRIPTORI I TABLETS */
+        @media (min-width: 576px) and (max-width: 767px) {
+            /* Retocs específics per a pantalles de mida tablet petita */
+            .leds-decor {
+                width: 160px;
+                top: 45px;
+                right: -20px;
+            }
+        }
+
         @media (min-width: 768px) {
             .site-container {
                 margin: 20px auto;
@@ -289,6 +299,7 @@
                 width: 420px;
                 top: 70px;
                 right: -150px;
+                opacity: 1;
             }
         }
 
