@@ -28,7 +28,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow-x: hidden; /* Evita barres horitzontals pel tall dels focus */
+            overflow-x: hidden; /* MANTÉ ELS LEDS TALLATS A LA DRETA SENSE GENERAR BARRA DE DESPLAÇAMENT */
         }
 
         /* CONTAINER GENERAL */
@@ -149,7 +149,6 @@
         }
 
         .page-title {
-            /* Text fluid per forçar que quedi en una sola línia */
             font-size: clamp(0.85rem, 3.8vw, 2rem);
             font-weight: 400;
             color: #1a1a1a;
@@ -226,26 +225,25 @@
             line-height: 1.5;
         }
 
-        /* PNG FOCUS (AJUSTAT A MÒBIL I TABLET) */
+        /* PNG FOCUS (MOGUT MÉS A LA DRETA PER A TALLAR LA VORA NATURALMENT) */
         .leds-decor {
             position: absolute;
-            z-index: 10; /* Perquè quedi superposat al vídeo */
+            z-index: 10;
             pointer-events: none;
             transform: scaleX(-1);
-            width: 120px; /* Reduït per a mòbil */
-            top: 50px;    /* Col·locat lleugerament sobre el vídeo de Corcovado */
-            right: -10px;
+            width: 110px; /* Un punt més petit */
+            top: 45px;
+            right: -45px; /* Mogut més a la dreta per a amagar el tall */
             opacity: 0.95;
         }
 
 
         /* 4. DISSENY RESPONSIVE PER A ESCRIPTORI I TABLETS */
         @media (min-width: 576px) and (max-width: 767px) {
-            /* Retocs específics per a pantalles de mida tablet petita */
             .leds-decor {
-                width: 160px;
-                top: 45px;
-                right: -35px;
+                width: 140px;
+                top: 40px;
+                right: -55px; /* Manté el tall amagat a la dreta en pantalles de mida mitjana */
             }
         }
 
