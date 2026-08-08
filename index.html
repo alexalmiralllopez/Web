@@ -9,12 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     
-<meta property="og:title" content="Groovin' Around" />
-<meta property="og:description" content="Música en directe, Sonoritzacions i Il·luminació." />
-<meta property="og:image" content="https://www.groovinaround.com/logocolor.png" />
-<meta property="og:image:type" content="image/png" />
-<meta property="og:url" content="https://www.groovinaround.com/" />
-<meta property="og:type" content="website" />
+    <meta property="og:title" content="Groovin' Around" />
+    <meta property="og:description" content="Música en directe, Sonoritzacions i Il·luminació." />
+    <meta property="og:image" content="https://www.groovinaround.com/logocolor.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:url" content="https://www.groovinaround.com/" />
+    <meta property="og:type" content="website" />
 
     <style>
         /* 1. CONFIGURACIÓ GENERAL DE LA PÀGINA */
@@ -26,33 +26,34 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f7d648; /* El groc corporatiu de la teva captura */
+            background-color: #f7d648;
             color: #1a1a1a;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden; /* Evita qualsevol desbordament horitzontal */
         }
 
         /* CONTAINER GENERAL */
         .site-container {
-            width: 95%;
+            width: 92%;
             max-width: 1200px;
-            margin: 20px auto;
+            margin: 10px auto;
             background-color: #f7d648;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            position: relative; /* Per al menú desplegable */
+            position: relative;
         }
 
         /* 2. HEADER: LOGO I MENÚ RESPONSIVE */
         header {
-            padding: 20px 0;
+            padding: 15px 0;
             display: flex;
-            justify-content: space-between; /* Logo esquerra, menú dreta */
+            justify-content: space-between;
             align-items: center;
-            position: relative; /* Per al menú desplegable */
-            z-index: 100; /* Assegura que el header estigui a sobre del contingut */
+            position: relative;
+            z-index: 100;
         }
 
         .logo-link {
@@ -66,17 +67,18 @@
         }
 
         .logo {
-            max-width: 220px;
+            max-width: 180px;
+            width: 100%;
             height: auto;
         }
 
-        /* ICONA DE MENÚ HAMBURGER (Tres línies) */
+        /* ICONA DE MENÚ HAMBURGER */
         .menu-icon {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
             cursor: pointer;
-            padding: 10px;
+            padding: 5px;
             transition: opacity 0.3s ease;
         }
 
@@ -85,37 +87,31 @@
         }
 
         .bar {
-            width: 35px;
-            height: 4px;
-            background-color: #1a1a1a; /* Negre com el text */
+            width: 30px;
+            height: 3.5px;
+            background-color: #1a1a1a;
             border-radius: 4px;
             transition: all 0.3s ease;
         }
 
-        /* EL MENÚ DESPLEGABLE ANIMAT (Sense display:none per permetre transicions) */
+        /* MENÚ DESPLEGABLE */
         .dropdown-menu {
             position: absolute;
-            top: 100%; /* Just a sota del header */
+            top: 100%;
             right: 0;
             width: auto;
             min-width: 200px;
-            
-            /* CANVI D'OPACITAT AQUÍ: 26, 26, 26 és el #1a1a1a i 0.75 és el 75% d'opacitat */
-            background-color: rgba(26, 26, 26, 0.75); 
-            backdrop-filter: blur(5px); /* Efecte extra: difumina el fons groc que es veu a través */
-            
+            background-color: rgba(26, 26, 26, 0.85); 
+            backdrop-filter: blur(5px);
             border-radius: 12px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.25);
             padding: 10px 0;
-            
-            /* ESTAT INICIAL PER A LA TRANSICIÓ ACCESSIBLE */
             opacity: 0;
             visibility: hidden;
             transform: translateY(-15px);
             transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
         }
 
-        /* Classe que afegirem amb JS per mostrar el menú de manera fluida */
         .dropdown-menu.open {
             opacity: 1;
             visibility: visible;
@@ -126,85 +122,66 @@
             list-style: none;
         }
 
-        /* ELS ENLLAÇOS DEL MENÚ */
         .dropdown-menu a {
             display: block;
-            padding: 15px 25px;
+            padding: 12px 20px;
             text-decoration: none;
-            color: #ffffff; /* El text es manté 100% blanc i llegible */
+            color: #ffffff;
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: background-color 0.2s ease;
         }
 
         .dropdown-menu a:hover {
-            /* Fons una mica més marcat en passar-hi el ratolí, mantenint la transparència */
             background-color: rgba(255, 255, 255, 0.1); 
         }
 
-        /* Ajustaments per quan el menú està obert (Efecte creu) */
         .menu-icon.active .bar:nth-child(1) {
-            transform: translateY(10px) rotate(45deg);
+            transform: translateY(8.5px) rotate(45deg);
         }
         .menu-icon.active .bar:nth-child(2) {
             opacity: 0;
         }
         .menu-icon.active .bar:nth-child(3) {
-            transform: translateY(-10px) rotate(-45deg);
+            transform: translateY(-8.5px) rotate(-45deg);
         }
 
         /* 3. COS PRINCIPAL */
         .main-content {
             display: flex;
             flex-direction: column;
-            gap: 40px;
-            padding: 40px 0;
+            gap: 25px;
+            padding: 20px 0;
             flex-grow: 1;
         }
 
-        @media (min-width: 768px) {
-            .main-content {
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-            }
-            .text-column {
-                flex: 1;
-                max-width: 55%;
-            }
-            .video-column {
-                flex: 1;
-                max-width: 42%;
-            }
-        }
-
-        /* TEXTOS */
+        /* TEXTOS ADAPTATIUS */
         h1 {
-            font-size: 2.8rem;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
             font-weight: 700;
             line-height: 1.2;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             color: #1a1a1a;
-            letter-spacing: -1px;
+            letter-spacing: -0.5px;
         }
 
         .subtitle {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            line-height: 1.5;
+            margin-bottom: 15px;
             color: #333333;
             font-weight: 500;
         }
 
-        /* Nova classe específica per assegurar que la definició del trio ocupi una sola línia */
         .line-format {
-            font-size: 0.95rem; 
-            white-space: nowrap;
+            font-size: clamp(0.85rem, 2.2vw, 0.95rem); 
+            white-space: normal; /* Permet ajustar el text a mòbil sense talls */
+            display: inline-block;
         }
 
         .line-format small {
-            font-size: 0.8rem;
+            font-size: 0.8em;
             font-weight: 400;
             opacity: 0.85;
         }
@@ -215,12 +192,12 @@
             background-color: #1f6f62;
             color: #ffffff;
             text-decoration: none;
-            padding: 14px 32px;
+            padding: 12px 28px;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 2vw, 1rem);
             transition: background-color 0.3s ease, transform 0.2s ease;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         .btn-contact:hover {
@@ -232,9 +209,9 @@
         .video-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* Relació d'aspecte 16:9 */
+            padding-bottom: 56.25%; /* Aspect ratio 16:9 */
             height: 0;
-            border-radius: 24px;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
@@ -248,12 +225,44 @@
             border: none;
         }
 
-        /* 4. FOOTER */
+        /* 4. MEDIA QUERIES PER A TABLETS I DESKTOPS */
+        @media (min-width: 768px) {
+            .site-container {
+                margin: 20px auto;
+            }
+            .logo {
+                max-width: 220px;
+            }
+            .main-content {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                gap: 40px;
+                padding: 40px 0;
+            }
+            .text-column {
+                flex: 1;
+                max-width: 55%;
+            }
+            .video-column {
+                flex: 1;
+                max-width: 42%;
+            }
+            .line-format {
+                white-space: nowrap; /* En pantalles grans manté el format en una sola línia */
+            }
+            .btn-contact {
+                padding: 14px 32px;
+                margin-top: 10px;
+            }
+        }
+
+        /* 5. FOOTER */
         footer {
             background-color: #ebd154;
-            padding: 20px;
+            padding: 15px 20px;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
             color: #2b2b2b;
             margin-top: auto;
@@ -291,9 +300,8 @@
                 <h1>Música en directe,<br>sonoritzacions /<br>il·luminació</h1>
                 
                 <p class="subtitle">
-                    <span class="line-format">Un <strong>trio</strong> on es combinen <strong>orgue</strong> <small>(Hammond)</small>, <strong>saxo</strong> tenor o <strong>trompeta</strong> amb <strong>bateria</strong> i <strong>guitarra</strong> elèctrica. <br>
+                    <span class="line-format">Un <strong>trio</strong> on es combinen <strong>orgue</strong> <small>(Hammond)</small>, <strong>saxo</strong> tenor o <strong>trompeta</strong> amb <strong>bateria</strong> i <strong>guitarra</strong> elèctrica.</span><br>
                     Un espectacle on interacció col·lectiva i tecnologia s'uneixen per compartir bons moments.
-                      </span>
                 </p>
                 
                 <p class="subtitle">
