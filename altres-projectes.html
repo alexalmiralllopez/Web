@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groovin' Around</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <meta property="og:title" content="Groovin' Around" />
+    <meta property="og:description" content="Música en directe, Sonoritzacions i Il·luminació." />
+    <meta property="og:image" content="https://www.groovinaround.com/logocolor.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:url" content="https://www.groovinaround.com/" />
+    <meta property="og:type" content="website" />
+
+    <style>
+        /* 1. CONFIGURACIÓ GENERAL DE LA PÀGINA */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f7d648;
+            color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Evita qualsevol desbordament horitzontal */
+        }
+
+        /* CONTAINER GENERAL */
+        .site-container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 10px auto;
+            background-color: #f7d648;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* 2. HEADER: LOGO I MENÚ RESPONSIVE */
+        header {
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo-link {
+            display: inline-block;
+            line-height: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .logo-link:hover {
+            transform: scale(1.02);
+        }
+
+        .logo {
+            max-width: 180px;
+            width: 100%;
+            height: auto;
+        }
+
+        /* ICONA DE MENÚ HAMBURGER */
+        .menu-icon {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-icon:hover {
+            opacity: 0.8;
+        }
+
+        .bar {
+            width: 30px;
+            height: 3.5px;
+            background-color: #1a1a1a;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        /* MENÚ DESPLEGABLE */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: auto;
+            min-width: 200px;
+            background-color: rgba(26, 26, 26, 0.85); 
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu ul {
+            list-style: none;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.1); 
+        }
+
+        .menu-icon.active .bar:nth-child(1) {
+            transform: translateY(8.5px) rotate(45deg);
+        }
+        .menu-icon.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-icon.active .bar:nth-child(3) {
+            transform: translateY(-8.5px) rotate(-45deg);
+        }
+
+        /* 3. COS PRINCIPAL */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            padding: 20px 0;
+            flex-grow: 1;
+        }
+
+        /* TEXTOS ADAPTATIUS */
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            line-height: 1.5;
+            margin-bottom: 15px;
+            color: #333333;
+            font-weight: 500;
+        }
+
+        .line-format {
+            font-size: clamp(0.85rem, 2.2vw, 0.95rem); 
+            white-space: normal; /* Permet ajustar el text a mòbil sense talls */
+            display: inline-block;
+        }
+
+        .line-format small {
+            font-size: 0.8em;
+            font-weight: 400;
+            opacity: 0.85;
+        }
+
+        /* BOTÓ CONTACTA'NS */
+        .btn-contact {
+            display: inline-block;
+            background-color: #1f6f62;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 5px;
+        }
+
+        .btn-contact:hover {
+            background-color: #17544a;
+            transform: translateY(-2px);
+        }
+
+        /* MULTIMÈDIA / VIDEO YOUTUBE */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+            height: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* 4. MEDIA QUERIES PER A TABLETS I DESKTOPS */
+        @media (min-width: 768px) {
+            .site-container {
+                margin: 20px auto;
+            }
+            .logo {
+                max-width: 220px;
+            }
+            .main-content {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                gap: 40px;
+                padding: 40px 0;
+            }
+            .text-column {
+                flex: 1;
+                max-width: 55%;
+            }
+            .video-column {
+                flex: 1;
+                max-width: 42%;
+            }
+            .line-format {
+                white-space: nowrap; /* En pantalles grans manté el format en una sola línia */
+            }
+            .btn-contact {
+                padding: 14px 32px;
+                margin-top: 10px;
+            }
+        }
+
+        /* 5. FOOTER */
+        footer {
+            background-color: #ebd154;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #2b2b2b;
+            margin-top: auto;
+            border-radius: 0 0 12px 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="site-container">
+        
+        <header>
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="Groovin' Around Logo" class="logo">
+            </a>
+            
+            <div class="menu-icon" id="menu-icon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            
+            <nav id="dropdown-menu" class="dropdown-menu">
+                <ul>
+                    <li><a href="musica.html">Música</a></li>   
+                    <li><a href="altres-projectes.html">Altres projectes</a></li>
+                    <li><a href="qui-som.html">Qui som?</a></li>      
+                    <li><a href="manifest.html" target="_blank">Manifest</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            
+            <div class="text-column">
+                <h1>Música en directe,<br>sonoritzacions /<br>il·luminació</h1>
+                
+                <p class="subtitle">
+                    <span class="line-format">Un <strong>trio</strong> on es combinen <strong>orgue</strong> <small>(Hammond)</small>, <strong>saxo</strong> tenor o <strong>trompeta</strong> amb <strong>bateria</strong> i <strong>guitarra</strong> elèctrica.</span><br>
+                    Un espectacle on interacció col·lectiva i tecnologia s'uneixen per compartir bons moments.
+                </p>
+                
+                <p class="subtitle">
+                    Versions d'Horace Silver, Bob Marley, Dimitri Shostakovich, Johnny Hodges, Erik Satie, The Meters i més!
+                </p>
+                
+                <a href="mailto:info@groovinaround.com" class="btn-contact">Contacta'ns</a>
+            </div>
+
+            <div class="video-column">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/5eh9qBH933M?si=Mjc_XcHwqmwVdmLl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+    <footer>
+        &copy; Groovin' Around 2026 - All Rights Reserved
+    </footer>
+
+    <script>
+        const menuIcon = document.getElementById('menu-icon');
+        const dropdownMenu = document.getElementById('dropdown-menu');
+
+        menuIcon.addEventListener('click', function() {
+            dropdownMenu.classList.toggle('open');
+            menuIcon.classList.toggle('active');
+        });
+
+        window.addEventListener('click', function(event) {
+            if (!menuIcon.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.remove('open');
+                menuIcon.classList.remove('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
